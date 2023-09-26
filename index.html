@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Page Title</title>
+</head>
+<body>
+  <script>
+    // Your JavaScript goes here!
+    function getComputerChoice(){
+        var randomNumber = Math.floor(Math.random() * 3);
+        switch(randomNumber){
+            case 0:
+            return 'rock';
+            case 1:
+            return 'paper';
+            case 2:
+            return 'scissors';
+        }
+    }
+
+    function getPlayerChoice(){
+        var playerChoice = prompt("Please choose either 'rock', 'paper', or 'scissors'.");
+        case_insensitive_playerChoice = playerChoice.toLowerCase();
+        if(case_insensitive_playerChoice === 'rock' || case_insensitive_playerChoice  === 'paper' || case_insensitive_playerChoice  === 'scissors'){
+            return playerChoice;
+        }else{
+            console.log("Error: Please enter a valid choice.");
+        }
+    }
+
+    function playGame(computerChoice, playerChoice){
+        console.log(computerChoice, playerChoice);
+        if(computerChoice === playerChoice){
+            return "The game is a tie!";
+        }
+        if(computerChoice === 'rock'){
+            if(playerChoice === 'paper'){
+                return "The player won!";
+            }else{
+                return "The computer won!";
+            }
+        }
+        if(computerChoice === 'paper'){
+            if(playerChoice === 'scissors'){
+                return "The player won!";
+            }else{
+                return "The computer won!";
+            }
+        }
+        if(computerChoice === 'scissors'){
+            if(playerChoice === 'rock'){
+                return "The player won!";
+            }else{
+                return "The computer won!";
+            }
+        }
+    }
+
+    function bestOfFive(){
+        let playerScore = 0;
+        let computerScore = 0;
+        let outcome = "";
+        while (playerScore < 3 && computerScore < 3){
+            outcomeOfRound = playGame(getComputerChoice(), getPlayerChoice());
+            if (outcomeOfRound == "The player won!"){
+                playerScore++;  
+            }
+            else if (outcomeOfRound == "The computer won!"){
+                computerScore++;
+            }
+        }
+        playerScore > computerScore ? outcomeOfGame = "The player won the game!": outcome = "The computer won the game!";
+        return outcome
+    }
+
+    console.log(bestOfFive())
+  </script>
+</body>
+</html>
