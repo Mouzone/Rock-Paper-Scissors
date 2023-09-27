@@ -26,17 +26,22 @@
     </style>
 
     <script>
+    let ai_score = 0;
+    let player_score = 0;
+
     const container = document.querySelector("div.selections")
     const scoreboard = document.createElement('div');
     scoreboard.style.border = "solid" 
     scoreboard.style.background = "pink" 
+    scoreboard.style.display = "flex"
     const scoreboard_ai = document.createElement('div');
     const scoreboard_player = document.createElement('div');
+    scoreboard_ai.textContent = ai_score
+    scoreboard_player.textContent = player_score
     scoreboard.appendChild(scoreboard_ai)
     scoreboard.appendChild(scoreboard_player)
     container.appendChild(scoreboard)
-    let ai_score = 0;
-    let player_score = 0;
+
     
     function oneRoundRPS(player_choice){
 
@@ -115,7 +120,8 @@
         button.addEventListener('click', () => {
             const outcome = oneRoundRPS(button.className);
             console.log(outcome)
-            keepRunningScore(outcome);        })
+            keepRunningScore(outcome);        
+        })
     })
     </script>
 </body>
