@@ -15,9 +15,59 @@
     const buttons = document.querySelectorAll('button');
     buttons.forEach((button)=>{
         button.addEventListener('click', () => {
-            console.log(button.className);
+            oneRoundRPS(button.className);
         })
     })
+
+    function oneRoundRPS(player_choice){
+
+        ai_choice = generateAiChoice();
+
+        if (player_choice === ai_choice){
+            return "Tie"
+        }
+
+        if (player_choice === "rock"){
+            if (ai_choice === "paper"){
+                return "AI Wins"
+            }
+            if (ai_choice === "scissors"){
+                return "Player Wins"
+            }
+        }
+
+        if (player_choice === "paper"){
+            if (ai_choice === "scissors"){
+                return "AI Wins"
+            }
+            if (ai_choice === "rock"){
+                return "Player Wins"
+            }
+        }
+
+        if (player_choice === "scissors"){
+            if (ai_choice === "rock"){
+                return "AI Wins"
+            }
+            if (ai_choice === "paper"){
+                return "Player Wins"
+            }
+        }
+
+    }
+    function generateAiChoice(){
+        const random = Math.floor(Math.random() * 3);
+        if (random == 0){
+            return "rock";
+        }
+        if (random == 1){
+            return "paper";
+        }
+        else{
+            return "scissors"
+        }
+
+    }
   </script>
 </body>
 </html>
