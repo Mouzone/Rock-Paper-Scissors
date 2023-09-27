@@ -11,13 +11,21 @@
         <button class="scissors"> Scissors </button>
     </div>
   <script>
-    // Your JavaScript goes here!
     const buttons = document.querySelectorAll('button');
     buttons.forEach((button)=>{
         button.addEventListener('click', () => {
             console.log(oneRoundRPS(button.className));
         })
     })
+
+    const container = document.querySelector("div.selections")
+    const score = document.createElement('div');
+    score.style.border = "solid" 
+    score.style.background = "pink" 
+    container.appendChild(score)
+
+    let ai_score = 0;
+    let player_score = 0;
 
     function oneRoundRPS(player_choice){
 
@@ -66,6 +74,18 @@
         else{
             return "scissors"
         }
+
+    }
+    function keepRunningScore(round_outcome){
+        if (round_outcome === "AI Wins"){
+            outputScore("AI", ++ai_score)
+        }
+        if (round_outcome == "Player Wins"){
+            outputScore("Player", ++player_score)
+        }
+    }
+
+    function outputScore(user, score){
 
     }
   </script>
