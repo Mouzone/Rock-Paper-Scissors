@@ -29,6 +29,8 @@
     const buttons = document.querySelectorAll('button');
     buttons.forEach((button)=>{
         button.addEventListener('click', () => {
+            let ai_score = 0;
+            let player_score = 0;
             output_score(oneRoundRPS(button.className));
         })
     })
@@ -37,10 +39,11 @@
     const scoreboard = document.createElement('div');
     scoreboard.style.border = "solid" 
     scoreboard.style.background = "pink" 
-    container.appendChild(scoreboard)
-
-    let ai_score = 0;
-    let player_score = 0;
+    const scoreboard_ai = document.createElement('div');
+    const scorebaord_player = document.createElement('div');
+    scoreboard.appendChild(scoreboard_ai)
+    scoreboard.appendChild(scorebaord_player)
+  
 
     function oneRoundRPS(player_choice){
 
@@ -101,7 +104,18 @@
     }
 
     function outputScore(user, score){
-
+        if (user==="AI"){
+            scoreboard.removeChild(scoreboard_ai)
+            const scoreboard_ai = document.createElement('div');
+            scoreboard_ai.textContent = score
+            score.insertBefore(scoreboard_ai, scoreboard_player);
+        }
+        else{
+            scoreboard.removeChild(scoreboard_player)
+            const scoreboard_player = document.createElement('div');
+            scoreboard_player.textContent = score
+            score.insertBefore(scoreboard_ai, scoreboard_player);
+        }
     }
     </script>
 </body>
