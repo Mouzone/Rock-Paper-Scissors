@@ -15,14 +15,14 @@
     const buttons = document.querySelectorAll('button');
     buttons.forEach((button)=>{
         button.addEventListener('click', () => {
-            oneRoundRPS(button.className);
+            console.log(oneRoundRPS(button.className));
         })
     })
 
     function oneRoundRPS(player_choice){
 
         ai_choice = generateAiChoice();
-
+        console.log(ai_choice)
         if (player_choice === ai_choice){
             return "Tie"
         }
