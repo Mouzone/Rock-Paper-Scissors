@@ -6,23 +6,38 @@
 </head>
 <body>
     <div class="selections">
-        <button class="rock"> Rock </button>
-        <button class="paper"> Paper </button>
-        <button class="scissors"> Scissors </button>
+        <div class="buttons">
+            <button class="rock"> Rock </button>
+            <button class="paper"> Paper </button>
+            <button class="scissors"> Scissors </button>
+        </div>
     </div>
-  <script>
+
+    <style>
+        .selections{
+            display: flex;
+            flex-direction: column;
+        }
+
+        .buttons{
+            display: flex;
+        }
+        
+    </style>
+
+    <script>
     const buttons = document.querySelectorAll('button');
     buttons.forEach((button)=>{
         button.addEventListener('click', () => {
-            console.log(oneRoundRPS(button.className));
+            output_score(oneRoundRPS(button.className));
         })
     })
 
     const container = document.querySelector("div.selections")
-    const score = document.createElement('div');
-    score.style.border = "solid" 
-    score.style.background = "pink" 
-    container.appendChild(score)
+    const scoreboard = document.createElement('div');
+    scoreboard.style.border = "solid" 
+    scoreboard.style.background = "pink" 
+    container.appendChild(scoreboard)
 
     let ai_score = 0;
     let player_score = 0;
@@ -88,6 +103,6 @@
     function outputScore(user, score){
 
     }
-  </script>
+    </script>
 </body>
 </html>
