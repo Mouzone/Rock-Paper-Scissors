@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Page Title</title>
+  <style>
+    .selections {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 200px 0;
+    }
+    .buttons {
+      display: flex;
+    }
+    .scoreboard {
+      border: solid;
+      background: pink;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .headers {
+      display: flex;
+      border: solid;
+    }
+    .header {
+      border: solid;
+    }
+    .user-scores {
+      display: flex;
+      justify-content: center;
+      gap: 50px;
+    }
+    .score {
+      border: solid;
+    }
+  </style>
+</head>
+<body>
+  <div class="selections">
+    <div class="buttons">
+      <button class="choice" data-choice="rock">Rock</button>
+      <button class="choice" data-choice="paper">Paper</button>
+      <button class="choice" data-choice="scissors">Scissors</button>
+    </div>
+  </div>
+  <div class="scoreboard">
+    <div class="headers">
+      <div class="header">Player Score</div>
+      <div class="header">AI Score</div>
+    </div>
+    <div class="user-scores">
+      <div class="score player-score">0</div>
+      <div class="score ai-score">0</div>
+    </div>
+  </div>
+
+  <script>
+    let ai_score = 0;
+    let player_score = 0;
+    const playerScoreElement = document.querySelector('.player-score');
+    const aiScoreElement = document.querySelector('.ai-score');
+
+    function oneRoundRPS(player_choice) {
+      const ai_choice = generateAiChoice();
+
+      if (player_choice === ai_choice) {
+        return "Tie";
+      }
+
+      if (
+        (player_choice === "rock" && ai_choice === "scissors") ||
+        (player_choice === "paper" && ai_choice === "rock") ||
+        (player_choice === "scissors" && ai_choice === "paper")
+      ) {
+        return "Player Wins";
+      }
+
+      return "AI Wins";
+    }
+
+    function generateAiChoice() {
+      const choices = ["rock", "paper", "scissors"];
+      const randomIndex = Math.floor(Math.random() * choices.length);
+      return choices[randomIndex];
+    }
+
+    function outputScore(user, score) {
+      const scoreElement = user === "AI" ? aiScoreElement : playerScoreElement;
+      scoreElement.textContent = score;
+    }
+
+    function keepRunningScore(round_outcome) {
+      if (round_outcome === "AI Wins") {
+        outputScore("AI", ++ai_score);
+      }
+      if (round_outcome === "Player Wins") {
+        outputScore("Player", ++player_score);
+      }
+      setTimeout(checkWin, 0);
+    }
+
+    function checkWin() {
+      if (ai_score === 5 || player_score === 5) {
+        alert(`${ai_score === 5 ? 'AI' : 'Player'} Wins!`);
+        ai_score = 0;
+        player_score = 0;
+      }
+    }
+
+    const buttons = document.querySelectorAll('.choice');
+    buttons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const outcome = oneRoundRPS(button.getAttribute('data-choice'));
+        keepRunningScore(outcome);
+      });
+    });
+  </script>
+</body>
+</html>

@@ -129,32 +129,32 @@
     }
 
     function keepRunningScore(round_outcome) {
-    if (round_outcome === "AI Wins") {
-        outputScore("AI", ++ai_score);
+        if (round_outcome === "AI Wins") {
+            outputScore("AI", ++ai_score);
+        }
+        if (round_outcome === "Player Wins") {
+            outputScore("Player", ++player_score);
+        }
+        setTimeout(checkWin, 5);
     }
-    if (round_outcome === "Player Wins") {
-        outputScore("Player", ++player_score);
-    }
-    
-    if (ai_score === 5 || player_score === 5) {
-        checkWin(); // Trigger checkWin when either score reaches 5
-    }
-}
+
 
     
     function checkWin(){
         if (ai_score===5){
+            outputScore("AI", 5)
             alert("AI Wins!")
-            ai_score=0;
-            player_score=0;
-            outputScore("AI", 0)
-            outputScore("Player", 0)
+            ai_score=0
+            player_score=0
         }
         else if (player_score===5){
+            outputScore("Player", 5)
             alert("Player Wins!")
-            outputScore("AI", 0)
-            outputScore("Player", 0)
+            ai_score=0
+            player_score=0
         }
+        outputScore("AI", ai_score)
+        outputScore("Player", player_score);
     }
 
     const buttons = document.querySelectorAll('button');
