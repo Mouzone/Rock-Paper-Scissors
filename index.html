@@ -29,7 +29,10 @@
     let ai_score = 0;
     let player_score = 0;
 
-    const container = document.querySelector("div.selections")
+    const container = document.querySelector("div.selections");
+    container.style["align-items"] = "center"
+    container.style["justify-content"] = "center"
+    container.style.margin = "200px 0"
     const scoreboard = document.createElement('div');
     scoreboard.style.border = "solid" 
     scoreboard.style.background = "pink" 
