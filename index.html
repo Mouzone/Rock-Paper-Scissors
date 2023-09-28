@@ -37,12 +37,30 @@
     scoreboard.style.border = "solid" 
     scoreboard.style.background = "pink" 
     scoreboard.style.display = "flex"
+    scoreboard.style["flex-direction"] = "column"
+    const headers = document.createElement('div');
+    headers.style.display = "flex"
+    headers.style.border = "solid"
+    const player_header = document.createElement('div');
+    player_header.style.border = "solid"
+    const ai_header =  document.createElement('div');
+    ai_header.style.border = "solid"
+    player_header.textContent = "Player Score"
+    ai_header.textContent = "AI Score"
+    headers.appendChild(player_header)
+    headers.appendChild(ai_header)
+    scoreboard.append(headers)
+    const user_scores = document.createElement('div');
+    user_scores.style.display = "flex"
     const scoreboard_ai = document.createElement('div');
     const scoreboard_player = document.createElement('div');
     scoreboard_ai.textContent = ai_score
     scoreboard_player.textContent = player_score
-    scoreboard.appendChild(scoreboard_ai)
-    scoreboard.appendChild(scoreboard_player)
+    user_scores.style.justifyContent = "center"
+    user_scores.style.gap = "50px"
+    user_scores.appendChild(scoreboard_ai)
+    user_scores.appendChild(scoreboard_player)
+    scoreboard.appendChild(user_scores)
     container.appendChild(scoreboard)
 
     
@@ -98,34 +116,44 @@
 
     function outputScore(user, score){
         if (user==="AI"){
-            scoreboard.removeChild(scoreboard_ai)
+            user_scores.removeChild(scoreboard_ai)
             scoreboard_ai.textContent = score
-            scoreboard.insertBefore(scoreboard_ai, scoreboard_player);
+            user_scores.insertBefore(scoreboard_ai, scoreboard_player);
+
         }
         else{
-            scoreboard.removeChild(scoreboard_player)
+            user_scores.removeChild(scoreboard_player)
             scoreboard_player.textContent = score
-            scoreboard.appendChild(scoreboard_player);
+            user_scores.appendChild(scoreboard_player);
         }
     }
 
-    function keepRunningScore(round_outcome){
-        if (round_outcome === "AI Wins"){
-            outputScore("AI", ++ai_score)
-        }
-        if (round_outcome == "Player Wins"){
-            outputScore("Player", ++player_score)
-        }
-        checkWin()
+    function keepRunningScore(round_outcome) {
+    if (round_outcome === "AI Wins") {
+        outputScore("AI", ++ai_score);
     }
+    if (round_outcome === "Player Wins") {
+        outputScore("Player", ++player_score);
+    }
+    
+    if (ai_score === 5 || player_score === 5) {
+        checkWin(); // Trigger checkWin when either score reaches 5
+    }
+}
+
     
     function checkWin(){
         if (ai_score===5){
-            
-            
+            alert("AI Wins!")
+            ai_score=0;
+            player_score=0;
+            outputScore("AI", 0)
+            outputScore("Player", 0)
         }
         else if (player_score===5){
-
+            alert("Player Wins!")
+            outputScore("AI", 0)
+            outputScore("Player", 0)
         }
     }
 
@@ -134,7 +162,7 @@
         button.addEventListener('click', () => {
             const outcome = oneRoundRPS(button.className);
             console.log(outcome)
-            keepRunningScore(outcome);        
+            keepRunningScore(outcome);     
         })
     })
     </script>
