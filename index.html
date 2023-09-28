@@ -47,6 +47,11 @@
     ai_header.style.border = "solid"
     player_header.textContent = "Player Score"
     ai_header.textContent = "AI Score"
+    player_header.style.padding = "5px"
+    ai_header.style.padding = "5px"
+    ai_header.style["paddingLeft"] = "25px"
+    ai_header.style["paddingRight"] = "25px"
+
     headers.appendChild(player_header)
     headers.appendChild(ai_header)
     scoreboard.append(headers)
@@ -56,10 +61,14 @@
     const scoreboard_player = document.createElement('div');
     scoreboard_ai.textContent = ai_score
     scoreboard_player.textContent = player_score
-    user_scores.style.justifyContent = "center"
-    user_scores.style.gap = "50px"
-    user_scores.appendChild(scoreboard_ai)
+    scoreboard_player.style.padding = "5px"
+    scoreboard_player.style["paddingLeft"] = "45px"
+    scoreboard_player.style["paddingRight"] = "45px"
+    scoreboard_ai.style.padding = "5px"
+    scoreboard_ai.style["paddingLeft"] = "45px"
+    
     user_scores.appendChild(scoreboard_player)
+    user_scores.appendChild(scoreboard_ai)
     scoreboard.appendChild(user_scores)
     container.appendChild(scoreboard)
 
@@ -118,13 +127,14 @@
         if (user==="AI"){
             user_scores.removeChild(scoreboard_ai)
             scoreboard_ai.textContent = score
-            user_scores.insertBefore(scoreboard_ai, scoreboard_player);
+            user_scores.appendChild(scoreboard_ai);
 
         }
         else{
             user_scores.removeChild(scoreboard_player)
             scoreboard_player.textContent = score
-            user_scores.appendChild(scoreboard_player);
+            user_scores.insertBefore(scoreboard_player, scoreboard_ai);
+
         }
     }
 
